@@ -7,14 +7,15 @@ namespace serial {
 static const char *const TAG = "uart_mitm";
 
 void UARTMITM::loop() {
-  uint8_t c;
+  uint8_t r;
+  uint8_t t;
   while (this->uart1_->available()) {
-    this->uart1_->read_byte(&c);
-    this->uart2_->write_byte(c);
+    this->uart1_->read_byte(&t);
+    // ESP_LOGI(TAG, ">%c", t);
   }
   while (this->uart2_->available()) {
-    this->uart2_->read_byte(&c);
-    this->uart1_->write_byte(c);
+    this->uart2_->read_byte(&r);
+    // ESP_LOGI(TAG, ">%c", r);
   }
 }
 
